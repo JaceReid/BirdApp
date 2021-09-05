@@ -1,6 +1,10 @@
 # BirdApp
 A birding app developed in Java. This project was developed for my School Final IT practical assessment task
 
+<p align="center">
+  <img src="example.png" alt="Polybar">
+</p>
+
 ## Requirements 
 
 Uses Netbeans GUI so requires Netbeans. Extra JAR Files are included in the project.
