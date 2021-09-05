@@ -1,7 +1,7 @@
 package pat_james;
 
 import java.awt.Color;
-import java.awt.Image;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.ImageIcon;
@@ -20,12 +20,9 @@ public class GUI extends javax.swing.JFrame {
     static int foundbird = 0;
     int width;
 
-    static ArrayList<String> output = new ArrayList<>();
+    ArrayList<String> output = new ArrayList<>();
     ArrayList<Bird> birdArr;
-    BirdsManger bm = new BirdsManger();
-    AppManger am = new AppManger();
-    SpeciesManger sm = new SpeciesManger();
-    LogManger lm = new LogManger();
+    AppManger manger = new AppManger();
 
     DefaultTreeModel BirdTreeModel;
     DefaultTreeModel LogTreeModel;
@@ -34,8 +31,14 @@ public class GUI extends javax.swing.JFrame {
     DefaultMutableTreeNode LogTreeRootNode = new DefaultMutableTreeNode("Log");
 
     public GUI() {
+
+        manger.createBirds();
+        manger.CreateSpecies();
+        manger.CreateLogs();
+
         initCustomModels();
         initComponents();
+        btAdmin.setVisible(false);
 
     }
 
@@ -48,12 +51,12 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void CreateBirdNode(DefaultMutableTreeNode top) {
-        ArrayList<Species> specArr = sm.getSpecciesArr();
+        ArrayList<Species> specArr = manger.getSpecciesArr();
         for (Species specArr1 : specArr) {
             top.add(specArr1);
         }
 
-        ArrayList<Bird> birdArr = bm.getBirdArr();
+        birdArr = manger.getBirdArr();
 
         for (Bird b : birdArr) {
 
@@ -66,9 +69,9 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void CreateLogNode(DefaultMutableTreeNode top) {
-        ArrayList<Log> LogArr = lm.getLogArr();
+        ArrayList<Log> LogArr = manger.getLogArr();
         for (Log L : LogArr) {
-//            System.out.println(userID);
+
             if (L.getUserID() == userID) {
 
                 top.add(L);
@@ -83,7 +86,7 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jfLogin = new javax.swing.JFrame();
-        jLabel21 = new javax.swing.JLabel();
+        lblWrongInfo = new javax.swing.JLabel();
         btLogin = new javax.swing.JButton();
         lblLogin = new javax.swing.JLabel();
         txfUsername = new javax.swing.JTextField();
@@ -100,44 +103,50 @@ public class GUI extends javax.swing.JFrame {
         lblNewUserPassword2 = new javax.swing.JLabel();
         btNewUserEnter = new javax.swing.JButton();
         btNewUserCancel = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        lblSignUp = new javax.swing.JLabel();
+        lblAdmin = new javax.swing.JLabel();
         CBAdmin = new javax.swing.JCheckBox();
+        bthelpNewUser = new javax.swing.JButton();
         lblBackgroundNewUser = new javax.swing.JLabel();
         jfMainMenu = new javax.swing.JFrame();
         btLog = new javax.swing.JButton();
         btFind = new javax.swing.JButton();
         btBirdBook = new javax.swing.JButton();
         btAdmin = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        bthelpMainMenu = new javax.swing.JButton();
+        lblBGMainMenu = new javax.swing.JLabel();
         jfAdmin = new javax.swing.JFrame();
         btReadSpecies = new javax.swing.JButton();
         btReadBirds = new javax.swing.JButton();
         btReadAll = new javax.swing.JButton();
         btAdminBack = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        bthelpAdmin = new javax.swing.JButton();
+        lblBGAdmin = new javax.swing.JLabel();
         jfLog = new javax.swing.JFrame();
-        jLabel2 = new javax.swing.JLabel();
+        lblLogBook = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txaLog = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtLog = new javax.swing.JTree();
         btBackMain = new javax.swing.JButton();
         btNewLog = new javax.swing.JButton();
+        bthelpLog = new javax.swing.JButton();
         lblbackgroundLog = new javax.swing.JLabel();
         jfCreateLog = new javax.swing.JFrame();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        lblCreateLogBird = new javax.swing.JLabel();
+        lblCreateLogLocation = new javax.swing.JLabel();
         txfLogLocation = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
+        lblCreateLogDate = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
         txaNewLogDesc = new javax.swing.JTextArea();
         btNewLogOkay = new javax.swing.JButton();
         btNewLogCancel = new javax.swing.JButton();
-        jLabel26 = new javax.swing.JLabel();
+        lblCreateLogDesc = new javax.swing.JLabel();
         DCLogDate = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtLogBird = new javax.swing.JTree();
+        bthelpCreateLog = new javax.swing.JButton();
+        lbllogError = new javax.swing.JLabel();
         lblBGCreateLog = new javax.swing.JLabel();
         jfFind = new javax.swing.JFrame();
         btBackMain1 = new javax.swing.JButton();
@@ -156,6 +165,7 @@ public class GUI extends javax.swing.JFrame {
         btFindNext = new javax.swing.JButton();
         btFindPrevious = new javax.swing.JButton();
         lblFindBirdImage = new javax.swing.JLabel();
+        bthelpFind = new javax.swing.JButton();
         lblBGFind = new javax.swing.JLabel();
         jfBirdBook = new javax.swing.JFrame();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -165,9 +175,10 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane15 = new javax.swing.JScrollPane();
         jtBridBook = new javax.swing.JTree();
         lblBirdImageBirdBook = new javax.swing.JLabel();
-        lblbackgroundLog2 = new javax.swing.JLabel();
+        bthelpBirdBook = new javax.swing.JButton();
+        lblBGBirdBook = new javax.swing.JLabel();
         jfhelp = new javax.swing.JFrame();
-        lblhelpPage = new javax.swing.JLabel();
+        lblBGhelpPage = new javax.swing.JLabel();
         jfPickColour = new javax.swing.JFrame();
         CBPickColourBrown = new javax.swing.JCheckBox();
         CBPickColourBlue = new javax.swing.JCheckBox();
@@ -178,60 +189,9 @@ public class GUI extends javax.swing.JFrame {
         CBPickColourWhite = new javax.swing.JCheckBox();
         CBPickColourGrey = new javax.swing.JCheckBox();
         btColourPickerOK = new javax.swing.JButton();
+        bthelpColourPicker = new javax.swing.JButton();
+        lblColourError = new javax.swing.JLabel();
         lblBGColourPicker = new javax.swing.JLabel();
-        jfBirdIDList = new javax.swing.JFrame();
-        lblBackgroundBirdIDList = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTree3 = new javax.swing.JTree();
-        btBackMain3 = new javax.swing.JButton();
-        lblbackgroundLog3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        btBackMain4 = new javax.swing.JButton();
-        jComboBox7 = new javax.swing.JComboBox();
-        jComboBox8 = new javax.swing.JComboBox();
-        jComboBox9 = new javax.swing.JComboBox();
-        jComboBox10 = new javax.swing.JComboBox();
-        jComboBox11 = new javax.swing.JComboBox();
-        jComboBox12 = new javax.swing.JComboBox();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        txafoundbirds1 = new javax.swing.JTextArea();
-        btjfFindfind1 = new javax.swing.JButton();
-        lblbackgroundLog4 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jTree4 = new javax.swing.JTree();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
-        jLabel18 = new javax.swing.JLabel();
-        btBackMain5 = new javax.swing.JButton();
-        lblbackgroundLog5 = new javax.swing.JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        jpMainMenu = new javax.swing.JPanel();
-        btLog1 = new javax.swing.JButton();
-        btFind1 = new javax.swing.JButton();
-        btBirdBook1 = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
-        jpLog = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        jTree5 = new javax.swing.JTree();
-        btBackMain6 = new javax.swing.JButton();
-        lblbackgroundLog6 = new javax.swing.JLabel();
-        jScrollPane14 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
 
         jfLogin.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jfLogin.setTitle("Login");
@@ -239,9 +199,9 @@ public class GUI extends javax.swing.JFrame {
         jfLogin.setResizable(false);
         jfLogin.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel21.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 18)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 0, 0));
-        jfLogin.getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 270, 20));
+        lblWrongInfo.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 18)); // NOI18N
+        lblWrongInfo.setForeground(new java.awt.Color(255, 0, 0));
+        jfLogin.getContentPane().add(lblWrongInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 270, 20));
 
         btLogin.setText("Enter");
         btLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -256,7 +216,7 @@ public class GUI extends javax.swing.JFrame {
         jfLogin.getContentPane().add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, -1, -1));
 
         txfUsername.setForeground(new java.awt.Color(166, 155, 155));
-        txfUsername.setText("James");
+        txfUsername.setText("Username");
         txfUsername.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txfUsernameMouseClicked(evt);
@@ -265,7 +225,7 @@ public class GUI extends javax.swing.JFrame {
         jfLogin.getContentPane().add(txfUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 90, -1));
 
         txfPassword.setForeground(new java.awt.Color(166, 155, 155));
-        txfPassword.setText("1234");
+        txfPassword.setText("Pin");
         txfPassword.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txfPasswordMouseClicked(evt);
@@ -338,14 +298,22 @@ public class GUI extends javax.swing.JFrame {
         });
         jfNewUser.getContentPane().add(btNewUserCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 36)); // NOI18N
-        jLabel11.setText("Sign Up");
-        jfNewUser.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
+        lblSignUp.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 36)); // NOI18N
+        lblSignUp.setText("Sign Up");
+        jfNewUser.getContentPane().add(lblSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
 
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("Admin:");
-        jfNewUser.getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 80, -1));
+        lblAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        lblAdmin.setText("Admin:");
+        jfNewUser.getContentPane().add(lblAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 80, -1));
         jfNewUser.getContentPane().add(CBAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
+
+        bthelpNewUser.setText("Help");
+        bthelpNewUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bthelpNewUserActionPerformed(evt);
+            }
+        });
+        jfNewUser.getContentPane().add(bthelpNewUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         lblBackgroundNewUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
         jfNewUser.getContentPane().add(lblBackgroundNewUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 601, 391));
@@ -397,10 +365,18 @@ public class GUI extends javax.swing.JFrame {
                 btAdminActionPerformed(evt);
             }
         });
-        jfMainMenu.getContentPane().add(btAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, -1, -1));
+        jfMainMenu.getContentPane().add(btAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
-        jfMainMenu.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 600, 400));
+        bthelpMainMenu.setText("Help");
+        bthelpMainMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bthelpMainMenuActionPerformed(evt);
+            }
+        });
+        jfMainMenu.getContentPane().add(bthelpMainMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        lblBGMainMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
+        jfMainMenu.getContentPane().add(lblBGMainMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 600, 400));
 
         jfMainMenu.getAccessibleContext().setAccessibleParent(this);
 
@@ -451,22 +427,25 @@ public class GUI extends javax.swing.JFrame {
         });
         jfAdmin.getContentPane().add(btAdminBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
-        jfAdmin.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 600, 400));
+        bthelpAdmin.setText("Help");
+        bthelpAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bthelpAdminActionPerformed(evt);
+            }
+        });
+        jfAdmin.getContentPane().add(bthelpAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        lblBGAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
+        jfAdmin.getContentPane().add(lblBGAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 600, 400));
 
         jfLog.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jfLog.setMinimumSize(new java.awt.Dimension(600, 399));
         jfLog.setResizable(false);
-        jfLog.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                jfLogWindowClosed(evt);
-            }
-        });
         jfLog.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
-        jLabel2.setText("Log Book");
-        jfLog.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 100, 20));
+        lblLogBook.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        lblLogBook.setText("Log Book");
+        jfLog.getContentPane().add(lblLogBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 100, 20));
 
         txaLog.setColumns(20);
         txaLog.setRows(5);
@@ -502,18 +481,26 @@ public class GUI extends javax.swing.JFrame {
         });
         jfLog.getContentPane().add(btNewLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, -1, -1));
 
-        lblbackgroundLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco in tree small.jpg"))); // NOI18N
+        bthelpLog.setText("Help");
+        bthelpLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bthelpLogActionPerformed(evt);
+            }
+        });
+        jfLog.getContentPane().add(bthelpLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        lblbackgroundLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
         jfLog.getContentPane().add(lblbackgroundLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 399));
 
         jfCreateLog.setMinimumSize(new java.awt.Dimension(600, 399));
         jfCreateLog.setResizable(false);
         jfCreateLog.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel23.setText("Bird");
-        jfCreateLog.getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
+        lblCreateLogBird.setText("Bird");
+        jfCreateLog.getContentPane().add(lblCreateLogBird, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
-        jLabel24.setText("Location");
-        jfCreateLog.getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        lblCreateLogLocation.setText("Location");
+        jfCreateLog.getContentPane().add(lblCreateLogLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         txfLogLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -522,8 +509,8 @@ public class GUI extends javax.swing.JFrame {
         });
         jfCreateLog.getContentPane().add(txfLogLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
 
-        jLabel25.setText("Date");
-        jfCreateLog.getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        lblCreateLogDate.setText("Date");
+        jfCreateLog.getContentPane().add(lblCreateLogDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         txaNewLogDesc.setColumns(20);
         txaNewLogDesc.setRows(5);
@@ -540,10 +527,15 @@ public class GUI extends javax.swing.JFrame {
         jfCreateLog.getContentPane().add(btNewLogOkay, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, -1, -1));
 
         btNewLogCancel.setText("Cancel");
+        btNewLogCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNewLogCancelActionPerformed(evt);
+            }
+        });
         jfCreateLog.getContentPane().add(btNewLogCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
-        jLabel26.setText("Descrition");
-        jfCreateLog.getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        lblCreateLogDesc.setText("Descrition");
+        jfCreateLog.getContentPane().add(lblCreateLogDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
         jfCreateLog.getContentPane().add(DCLogDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 150, 30));
 
         jtLogBird.setModel(BirdTreeModel);
@@ -551,8 +543,16 @@ public class GUI extends javax.swing.JFrame {
 
         jfCreateLog.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 180, 320));
 
-        lblBGCreateLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco in tree small.jpg"))); // NOI18N
-        lblBGCreateLog.setText("jLabel22");
+        bthelpCreateLog.setText("Help");
+        bthelpCreateLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bthelpCreateLogActionPerformed(evt);
+            }
+        });
+        jfCreateLog.getContentPane().add(bthelpCreateLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jfCreateLog.getContentPane().add(lbllogError, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 304, 180, 30));
+
+        lblBGCreateLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
         jfCreateLog.getContentPane().add(lblBGCreateLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
 
         jfFind.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -634,7 +634,15 @@ public class GUI extends javax.swing.JFrame {
         lblFindBirdImage.setPreferredSize(new java.awt.Dimension(100, 130));
         jfFind.getContentPane().add(lblFindBirdImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 130, 140));
 
-        lblBGFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco in tree 2 small.jpg"))); // NOI18N
+        bthelpFind.setText("Help");
+        bthelpFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bthelpFindActionPerformed(evt);
+            }
+        });
+        jfFind.getContentPane().add(bthelpFind, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        lblBGFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
         jfFind.getContentPane().add(lblBGFind, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -3, 600, 400));
 
         jfBirdBook.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -649,7 +657,7 @@ public class GUI extends javax.swing.JFrame {
         jfBirdBook.getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 260, 320));
 
         jLabel3.setText("Bird Book");
-        jfBirdBook.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        jfBirdBook.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         btBackMain2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btBackMain2.setText("Back");
@@ -673,42 +681,58 @@ public class GUI extends javax.swing.JFrame {
         jfBirdBook.getContentPane().add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 170, 320));
         jfBirdBook.getContentPane().add(lblBirdImageBirdBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 214, 140, 140));
 
-        lblbackgroundLog2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna_Turaco in tree 3 small.jpg"))); // NOI18N
-        jfBirdBook.getContentPane().add(lblbackgroundLog2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -3, 600, 400));
+        bthelpBirdBook.setText("Help");
+        bthelpBirdBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bthelpBirdBookActionPerformed(evt);
+            }
+        });
+        jfBirdBook.getContentPane().add(bthelpBirdBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        lblBGBirdBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
+        jfBirdBook.getContentPane().add(lblBGBirdBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -3, 600, 400));
 
         jfhelp.setMinimumSize(new java.awt.Dimension(600, 399));
         jfhelp.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jfhelp.getContentPane().add(lblhelpPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 607, 401));
+        jfhelp.getContentPane().add(lblBGhelpPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 607, 401));
 
         jfPickColour.setTitle("New User");
-        jfPickColour.setMinimumSize(new java.awt.Dimension(540, 185));
+        jfPickColour.setMinimumSize(new java.awt.Dimension(540, 220));
         jfPickColour.setName("New User"); // NOI18N
         jfPickColour.setResizable(false);
         jfPickColour.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        CBPickColourBrown.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 12)); // NOI18N
         CBPickColourBrown.setText("Brown");
-        jfPickColour.getContentPane().add(CBPickColourBrown, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
+        jfPickColour.getContentPane().add(CBPickColourBrown, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, -1));
 
+        CBPickColourBlue.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 14)); // NOI18N
         CBPickColourBlue.setText("Blue");
-        jfPickColour.getContentPane().add(CBPickColourBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
+        jfPickColour.getContentPane().add(CBPickColourBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
+        CBPickColourGreen.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 12)); // NOI18N
         CBPickColourGreen.setText("Green");
-        jfPickColour.getContentPane().add(CBPickColourGreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, -1));
+        jfPickColour.getContentPane().add(CBPickColourGreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, -1));
 
+        CBPickColourOrange.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 12)); // NOI18N
         CBPickColourOrange.setText("Orange");
-        jfPickColour.getContentPane().add(CBPickColourOrange, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
+        jfPickColour.getContentPane().add(CBPickColourOrange, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, -1, -1));
 
+        CBPickColourBlack.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 12)); // NOI18N
         CBPickColourBlack.setText("Black");
-        jfPickColour.getContentPane().add(CBPickColourBlack, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        jfPickColour.getContentPane().add(CBPickColourBlack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
+        CBPickColourRed.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 12)); // NOI18N
         CBPickColourRed.setText("Red");
-        jfPickColour.getContentPane().add(CBPickColourRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
+        jfPickColour.getContentPane().add(CBPickColourRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, -1, -1));
 
+        CBPickColourWhite.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 12)); // NOI18N
         CBPickColourWhite.setText("White");
-        jfPickColour.getContentPane().add(CBPickColourWhite, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, -1, -1));
+        jfPickColour.getContentPane().add(CBPickColourWhite, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, -1));
 
+        CBPickColourGrey.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 12)); // NOI18N
         CBPickColourGrey.setText("Grey");
-        jfPickColour.getContentPane().add(CBPickColourGrey, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jfPickColour.getContentPane().add(CBPickColourGrey, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         btColourPickerOK.setText("Okay");
         btColourPickerOK.addActionListener(new java.awt.event.ActionListener() {
@@ -716,229 +740,23 @@ public class GUI extends javax.swing.JFrame {
                 btColourPickerOKActionPerformed(evt);
             }
         });
-        jfPickColour.getContentPane().add(btColourPickerOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, -1, -1));
+        jfPickColour.getContentPane().add(btColourPickerOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, -1, -1));
+
+        bthelpColourPicker.setText("Help");
+        bthelpColourPicker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bthelpColourPickerActionPerformed(evt);
+            }
+        });
+        jfPickColour.getContentPane().add(bthelpColourPicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        lblColourError.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 12)); // NOI18N
+        jfPickColour.getContentPane().add(lblColourError, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 70, 20));
 
         lblBGColourPicker.setBackground(new java.awt.Color(52, 104, 109));
         lblBGColourPicker.setForeground(new java.awt.Color(0, 72, 72));
-        lblBGColourPicker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna_Turaco in tree 3 small.jpg"))); // NOI18N
+        lblBGColourPicker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
         jfPickColour.getContentPane().add(lblBGColourPicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 190));
-
-        jfBirdIDList.setTitle("List of Bird ID");
-        jfBirdIDList.setBackground(new java.awt.Color(4, 120, 134));
-        jfBirdIDList.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        jfBirdIDList.setMinimumSize(new java.awt.Dimension(599, 398));
-        jfBirdIDList.setResizable(false);
-        jfBirdIDList.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblBackgroundBirdIDList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco in tree small.jpg"))); // NOI18N
-        jfBirdIDList.getContentPane().add(lblBackgroundBirdIDList, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, -1));
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel10.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
-        jLabel10.setText("Log Book");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 100, 20));
-
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane6.setViewportView(jTextArea3);
-
-        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 270, 220));
-
-        jScrollPane7.setViewportView(jTree3);
-
-        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 42, 140, 220));
-
-        btBackMain3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btBackMain3.setText("Back");
-        btBackMain3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBackMain3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btBackMain3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 60, -1));
-
-        lblbackgroundLog3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco in tree small.jpg"))); // NOI18N
-        jPanel1.add(lblbackgroundLog3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 399));
-
-        jTabbedPane1.addTab("tab1", jPanel1);
-
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btBackMain4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btBackMain4.setText("Back");
-        btBackMain4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBackMain4ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btBackMain4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 60, -1));
-
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
-
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
-
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, -1, -1));
-
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, -1, -1));
-
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
-
-        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
-
-        jLabel12.setText("Bird Type");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
-
-        jLabel13.setText("Size");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
-
-        jLabel14.setText("Habitat");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
-
-        jLabel15.setText("Colour");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
-
-        jLabel16.setText("Beak type");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, -1, -1));
-
-        jLabel17.setText("Time seen");
-        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
-
-        txafoundbirds1.setColumns(20);
-        txafoundbirds1.setRows(5);
-        jScrollPane8.setViewportView(txafoundbirds1);
-
-        jPanel2.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 70, 230, 230));
-
-        btjfFindfind1.setText("Find");
-        btjfFindfind1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btjfFindfind1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btjfFindfind1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, -1, -1));
-
-        lblbackgroundLog4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco in tree 2 small.jpg"))); // NOI18N
-        jPanel2.add(lblbackgroundLog4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -3, 600, 400));
-
-        jTabbedPane1.addTab("tab2", jPanel2);
-
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jScrollPane9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane9.setViewportView(jTree4);
-
-        jPanel3.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 110, 320));
-
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane10.setViewportView(jTextArea4);
-
-        jPanel3.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 330, 320));
-
-        jLabel18.setText("Bird Book");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
-
-        btBackMain5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btBackMain5.setText("Back");
-        btBackMain5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBackMain5ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btBackMain5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 60, -1));
-
-        lblbackgroundLog5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna_Turaco in tree 3 small.jpg"))); // NOI18N
-        jPanel3.add(lblbackgroundLog5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -3, 600, 400));
-
-        jTabbedPane1.addTab("tab3", jPanel3);
-
-        jTabbedPane1.getAccessibleContext().setAccessibleDescription("");
-
-        jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jpMainMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btLog1.setText("Log");
-        btLog1.setMaximumSize(new java.awt.Dimension(55, 23));
-        btLog1.setMinimumSize(new java.awt.Dimension(55, 23));
-        btLog1.setPreferredSize(new java.awt.Dimension(85, 30));
-        btLog1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btLog1ActionPerformed(evt);
-            }
-        });
-        jpMainMenu.add(btLog1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
-
-        btFind1.setText("Find");
-        btFind1.setMaximumSize(new java.awt.Dimension(55, 23));
-        btFind1.setMinimumSize(new java.awt.Dimension(55, 23));
-        btFind1.setPreferredSize(new java.awt.Dimension(85, 30));
-        btFind1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFind1ActionPerformed(evt);
-            }
-        });
-        jpMainMenu.add(btFind1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
-
-        btBirdBook1.setText("Bird Book");
-        btBirdBook1.setMaximumSize(new java.awt.Dimension(55, 23));
-        btBirdBook1.setMinimumSize(new java.awt.Dimension(55, 23));
-        btBirdBook1.setPreferredSize(new java.awt.Dimension(85, 30));
-        btBirdBook1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBirdBook1ActionPerformed(evt);
-            }
-        });
-        jpMainMenu.add(btBirdBook1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
-
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco on log small.jpg"))); // NOI18N
-        jpMainMenu.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 600, 400));
-
-        jLayeredPane1.add(jpMainMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
-
-        jpLog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel20.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
-        jLabel20.setText("Log Book");
-        jpLog.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 100, 20));
-
-        jTextArea5.setColumns(20);
-        jTextArea5.setRows(5);
-        jScrollPane11.setViewportView(jTextArea5);
-
-        jpLog.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 270, 220));
-
-        jScrollPane12.setViewportView(jTree5);
-
-        jpLog.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 42, 140, 220));
-
-        btBackMain6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btBackMain6.setText("Back");
-        btBackMain6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBackMain6ActionPerformed(evt);
-            }
-        });
-        jpLog.add(btBackMain6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 60, -1));
-
-        lblbackgroundLog6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Knysna Tarco in tree small.jpg"))); // NOI18N
-        jpLog.add(lblbackgroundLog6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 399));
-
-        jLayeredPane1.add(jpLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 390));
-
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane14.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("login");
@@ -955,16 +773,20 @@ public class GUI extends javax.swing.JFrame {
     private void btLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLogActionPerformed
         jfLog.setVisible(true);
         jfMainMenu.setVisible(false);
+        
+
+
     }//GEN-LAST:event_btLogActionPerformed
 
     private void btFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFindActionPerformed
         jfFind.setVisible(true);
         jfMainMenu.setVisible(false);
-        ArrayList<Integer> idArr = am.gettypeID();
-        ArrayList<String> nameArr = am.getTypeName();
 
-        for (int i = 0; i < idArr.size(); i++) {
-            String temp = nameArr.get(i) + ": " + idArr.get(i);
+        int[] idArr = manger.gettypeID();
+        String[] nameArr = manger.getTypeName();
+
+        for (int i = 0; i < idArr.length; i++) {
+            String temp = nameArr[i] + ": " + idArr[i];
             DBFindBirdType.addItem(temp);
 
         }
@@ -979,7 +801,6 @@ public class GUI extends javax.swing.JFrame {
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
 
-        btAdmin.setVisible(false);
         String pass = txfPassword.getText();
         boolean vaild = false;
         Scanner sc;
@@ -998,25 +819,23 @@ public class GUI extends javax.swing.JFrame {
         }
         if (vaild) {
 
-            if (am.login(txfUsername.getText(), Integer.parseInt(txfPassword.getText()))) {
+            if (manger.login(txfUsername.getText(), Integer.parseInt(txfPassword.getText()))) {
 
                 jfLogin.setVisible(false);
                 jfMainMenu.setVisible(true);
-                
-                userID = am.getUserID();
+                btAdmin.setVisible(manger.isAdmin());
+
+                userID = manger.getUserID();
                 CreateLogNode(LogTreeRootNode);
                 LogTreeModel = new DefaultTreeModel(LogTreeRootNode);
                 initComponents();
-                
-                if (am.isAdmin()) {
-                    btAdmin.setVisible(true);
-                }
+
             } else {
-                jLabel21.setText("Wrong username \nor password");
+                lblWrongInfo.setText("Wrong username \nor password");
 
             }
         } else {
-            System.out.println("Pass not number");
+            lblWrongInfo.setText("Pin Not Number");
         }
 
 
@@ -1032,10 +851,6 @@ public class GUI extends javax.swing.JFrame {
         txfPassword.setForeground(Color.black);
     }//GEN-LAST:event_txfPasswordMouseClicked
 
-    private void jfLogWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jfLogWindowClosed
-        jfMainMenu.setVisible(true);
-    }//GEN-LAST:event_jfLogWindowClosed
-
     private void btBackMain1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackMain1ActionPerformed
         backToMain();
     }//GEN-LAST:event_btBackMain1ActionPerformed
@@ -1049,23 +864,46 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btBackMain2ActionPerformed
 
     private void btjfFindfindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btjfFindfindActionPerformed
-        output = new ArrayList<>();
+
         txafoundbirds.setText("");
-        int size = Integer.parseInt(txfFindSize.getText());
-        int birdType = DBFindBirdType.getSelectedIndex() + 1;
-        String habitat = (String) CBHabitat.getSelectedItem();
-        width = txafoundbirds.getWidth();
-        birdArr = bm.findBird(birdType, size, habitat, colour);
+        String error = "";
+        int size = 0;
+        try {
+            if (Integer.parseInt(txfFindSize.getText()) > 1 && Integer.parseInt(txfFindSize.getText()) < 1500) {
+                size = Integer.parseInt(txfFindSize.getText());
+            } else {
+                error += "enter a vaild number: vaild range 1 to 1500\n";
+            }
 
-        String desc = "";
-
-        for (int i = 0; i < birdArr.size(); i++) {
-
-            output.add(birdArr.get(i).output());
-
+        } catch (NumberFormatException ex) {
+            error += "enter a number\n";
         }
 
-        settxafoundbirds();
+        int birdType = DBFindBirdType.getSelectedIndex() + 1;
+        String habitat = "";
+        if (CBHabitat.getSelectedIndex() == -1) {
+            error += "Pick a habitat\n";
+        } else {
+            habitat = (String) CBHabitat.getSelectedItem();
+        }
+
+        width = txafoundbirds.getWidth();
+        if (error.equals("")) {
+            birdArr = manger.findBird(birdType, size, habitat, colour);
+            output = new ArrayList<>();
+            String desc = "";
+
+            for (int i = 0; i < birdArr.size(); i++) {
+
+                output.add(birdArr.get(i).output());
+
+            }
+
+            settxafoundbirds();
+
+        } else {
+            txafoundbirds.setText(error);
+        }
 
         txfFindSize.setText("");
         DBFindBirdType.setSelectedIndex(-1);
@@ -1078,7 +916,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btNewUserActionPerformed
 
     private void bthelpLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthelpLoginActionPerformed
-        jfhelp.setVisible(true);
+
         help(1);
     }//GEN-LAST:event_bthelpLoginActionPerformed
 
@@ -1089,7 +927,7 @@ public class GUI extends javax.swing.JFrame {
     private void btNewUserEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewUserEnterActionPerformed
         if (txfNewUserPassword1.getText().equals(txfNewUserPassword2.getText())) {
             boolean admin = CBAdmin.isSelected();
-            am.newuser(txfNewUserName.getText(), Integer.parseInt(txfNewUserPassword1.getText()), admin);
+            manger.newuser(txfNewUserName.getText(), Integer.parseInt(txfNewUserPassword1.getText()), admin);
 
             jfNewUser.setVisible(false);
             jfLogin.setVisible(true);
@@ -1107,38 +945,6 @@ public class GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btNewUserCancelActionPerformed
 
-    private void btBackMain3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackMain3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btBackMain3ActionPerformed
-
-    private void btBackMain4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackMain4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btBackMain4ActionPerformed
-
-    private void btjfFindfind1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btjfFindfind1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btjfFindfind1ActionPerformed
-
-    private void btBackMain5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackMain5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btBackMain5ActionPerformed
-
-    private void btLog1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLog1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btLog1ActionPerformed
-
-    private void btFind1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFind1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btFind1ActionPerformed
-
-    private void btBirdBook1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBirdBook1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btBirdBook1ActionPerformed
-
-    private void btBackMain6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackMain6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btBackMain6ActionPerformed
-
     private void btNewLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewLogActionPerformed
         jfCreateLog.setVisible(true);
         btFindPrevious.setVisible(false);
@@ -1153,23 +959,47 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btFindColourPickerActionPerformed
 
     private void btNewLogOkayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewLogOkayActionPerformed
-        jfCreateLog.setVisible(false);
-        jfLog.setVisible(true);
+        boolean error = false;
+        String errorMsg = "";
+
         String Location = txfLogLocation.getText();
-        int month = DCLogDate.getDate().getMonth();
-        String year = "" + DCLogDate.getDate().getYear();
-        year = year.substring(1, year.length());
-        int day = DCLogDate.getDate().getDate();
-        String date = day + "/" + month + "/" + year;
+        String date = "";
+        try {
+            int month = DCLogDate.getDate().getMonth();
+            String year = "" + DCLogDate.getDate().getYear();
+            year = year.substring(1, year.length());
+            int day = DCLogDate.getDate().getDate();
+            date = day + "/" + month + "/" + year;
+
+        } catch (NullPointerException e) {
+            error = true;
+            errorMsg += "No Date ";
+        }
 
         String desc = txaNewLogDesc.getText();
 
-        Bird bird = (Bird) jtLogBird.getLastSelectedPathComponent();
+        if (Location.equals("")) {
+            error = true;
+            errorMsg += "No location ";
+        }
 
-        int birdID = bird.getBirdID();
-        userID = am.getUserID();
+        Bird bird;
+        if (!error) {
+            try {
+                bird = (Bird) jtLogBird.getLastSelectedPathComponent();
+                int birdID = bird.getBirdID();
+                manger.newlog(userID, birdID, date, Location, desc);
+                jfCreateLog.setVisible(false);
+                jfLog.setVisible(true);
+            } catch (NullPointerException e) {
+                lbllogError.setText("No Bird selected");
+            }
+        } else {
+            lbllogError.setText(errorMsg);
+        }
 
-        am.newlog(userID, birdID, date, Location, desc);
+        manger.CreateLogs();
+        CreateLogNode(LogTreeRootNode);
 
     }//GEN-LAST:event_btNewLogOkayActionPerformed
 
@@ -1208,9 +1038,12 @@ public class GUI extends javax.swing.JFrame {
         if (CBPickColourWhite.isSelected()) {
             colour += "White#";
         }
-
-        if (colour.charAt(colour.length() - 1) == '#') {
-            colour = colour.substring(0, colour.length() - 2);
+        try {
+            if (colour.charAt(colour.length() - 1) == '#') {
+                colour = colour.substring(0, colour.length() - 2);
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            lblColourError.setText("Select a colour");
         }
 
         CBPickColourBlack.setSelected(false);
@@ -1243,35 +1076,35 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btFindPreviousActionPerformed
 
     private void jtBridBookMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtBridBookMousePressed
-        
+
         width = txaBirdBook.getWidth();
         if (jtBridBook.getLastSelectedPathComponent() instanceof Bird) {
 
             Bird bird = (Bird) jtBridBook.getLastSelectedPathComponent();
             txaBirdBook.setText(bird.output() + "\n" + bird.getDescrition());
-            System.out.println(bird.getImage());
-            lblBirdImageBirdBook.setIcon(am.Scaleimage("src/" +bird.getImage() ));
+
+            lblBirdImageBirdBook.setIcon(manger.Scaleimage("src/" + bird.getImage(), lblBirdImageBirdBook));
         } else if (jtBridBook.getLastSelectedPathComponent() instanceof Species) {
 
             Species spec = (Species) jtBridBook.getLastSelectedPathComponent();
             txaBirdBook.setText(spec.output());
         }
-        
+
         txaBirdBook.setCaretPosition(0);
 
     }//GEN-LAST:event_jtBridBookMousePressed
 
     private void btReadSpeciesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReadSpeciesActionPerformed
-        sm.readSpecies();
+        manger.readSpecies();
     }//GEN-LAST:event_btReadSpeciesActionPerformed
 
     private void btReadBirdsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReadBirdsActionPerformed
-        bm.readbirds();
+        manger.readbirds();
     }//GEN-LAST:event_btReadBirdsActionPerformed
 
     private void btReadAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReadAllActionPerformed
-        sm.readSpecies();
-        bm.readbirds();
+        manger.readSpecies();
+        manger.readbirds();
     }//GEN-LAST:event_btReadAllActionPerformed
 
     private void btAdminBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdminBackActionPerformed
@@ -1279,21 +1112,57 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btAdminBackActionPerformed
 
     private void jtLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLogMouseClicked
-        
 
-            Log log = (Log) jtLog.getLastSelectedPathComponent();
-            int birdID = log.getBirdID();
-            int birdbird = 0;
-            birdArr = bm.getBirdArr();
-            for (Bird birdArr1 : birdArr) {
-                if (birdArr1.getBirdID() == birdID) {
-                    birdbird = birdID;
-                }
+        Log log = (Log) jtLog.getLastSelectedPathComponent();
+        int birdID = log.getBirdID();
+        int birdbird = 0;
+        birdArr = manger.getBirdArr();
+        for (Bird birdArr1 : birdArr) {
+            if (birdArr1.getBirdID() == birdID) {
+                birdbird = birdID;
             }
+        }
 
-            txaLog.setText(log.output() + "\n" + birdArr.get(birdbird).getName());
-        
+        txaLog.setText(log.output() + "\n" + birdArr.get(birdbird).toString());
+
     }//GEN-LAST:event_jtLogMouseClicked
+
+    private void bthelpNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthelpNewUserActionPerformed
+        help(6);
+    }//GEN-LAST:event_bthelpNewUserActionPerformed
+
+    private void bthelpMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthelpMainMenuActionPerformed
+        help(2);
+    }//GEN-LAST:event_bthelpMainMenuActionPerformed
+
+    private void bthelpAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthelpAdminActionPerformed
+        help(8);
+    }//GEN-LAST:event_bthelpAdminActionPerformed
+
+    private void bthelpLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthelpLogActionPerformed
+        help(3);
+    }//GEN-LAST:event_bthelpLogActionPerformed
+
+    private void bthelpCreateLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthelpCreateLogActionPerformed
+        help(9);
+    }//GEN-LAST:event_bthelpCreateLogActionPerformed
+
+    private void bthelpFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthelpFindActionPerformed
+        help(4);
+    }//GEN-LAST:event_bthelpFindActionPerformed
+
+    private void bthelpBirdBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthelpBirdBookActionPerformed
+        help(5);
+    }//GEN-LAST:event_bthelpBirdBookActionPerformed
+
+    private void bthelpColourPickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthelpColourPickerActionPerformed
+        help(7);
+    }//GEN-LAST:event_bthelpColourPickerActionPerformed
+
+    private void btNewLogCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewLogCancelActionPerformed
+        jfCreateLog.setVisible(false);
+        jfLog.setVisible(true);
+    }//GEN-LAST:event_btNewLogCancelActionPerformed
 // </editor-fold>
 
     /**
@@ -1328,6 +1197,7 @@ public class GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new GUI().jfLogin.setVisible(true);
             }
         });
@@ -1352,20 +1222,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton btBackMain;
     private javax.swing.JButton btBackMain1;
     private javax.swing.JButton btBackMain2;
-    private javax.swing.JButton btBackMain3;
-    private javax.swing.JButton btBackMain4;
-    private javax.swing.JButton btBackMain5;
-    private javax.swing.JButton btBackMain6;
     private javax.swing.JButton btBirdBook;
-    private javax.swing.JButton btBirdBook1;
     private javax.swing.JButton btColourPickerOK;
     private javax.swing.JButton btFind;
-    private javax.swing.JButton btFind1;
     private javax.swing.JButton btFindColourPicker;
     private javax.swing.JButton btFindNext;
     private javax.swing.JButton btFindPrevious;
     private javax.swing.JButton btLog;
-    private javax.swing.JButton btLog1;
     private javax.swing.JButton btLogin;
     private javax.swing.JButton btNewLog;
     private javax.swing.JButton btNewLogCancel;
@@ -1376,71 +1239,31 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton btReadAll;
     private javax.swing.JButton btReadBirds;
     private javax.swing.JButton btReadSpecies;
+    private javax.swing.JButton bthelpAdmin;
+    private javax.swing.JButton bthelpBirdBook;
+    private javax.swing.JButton bthelpColourPicker;
+    private javax.swing.JButton bthelpCreateLog;
+    private javax.swing.JButton bthelpFind;
+    private javax.swing.JButton bthelpLog;
     private javax.swing.JButton bthelpLogin;
+    private javax.swing.JButton bthelpMainMenu;
+    private javax.swing.JButton bthelpNewUser;
     private javax.swing.JButton btjfFindfind;
-    private javax.swing.JButton btjfFindfind1;
-    private javax.swing.JComboBox jComboBox10;
-    private javax.swing.JComboBox jComboBox11;
-    private javax.swing.JComboBox jComboBox12;
-    private javax.swing.JComboBox jComboBox7;
-    private javax.swing.JComboBox jComboBox8;
-    private javax.swing.JComboBox jComboBox9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JList jList1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTree jTree3;
-    private javax.swing.JTree jTree4;
-    private javax.swing.JTree jTree5;
     private javax.swing.JFrame jfAdmin;
     private javax.swing.JFrame jfBirdBook;
-    private javax.swing.JFrame jfBirdIDList;
     private javax.swing.JFrame jfCreateLog;
     private javax.swing.JFrame jfFind;
     private javax.swing.JFrame jfLog;
@@ -1449,35 +1272,39 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JFrame jfNewUser;
     private javax.swing.JFrame jfPickColour;
     private javax.swing.JFrame jfhelp;
-    private javax.swing.JPanel jpLog;
-    private javax.swing.JPanel jpMainMenu;
     private javax.swing.JTree jtBridBook;
     private javax.swing.JTree jtLog;
     private javax.swing.JTree jtLogBird;
+    private javax.swing.JLabel lblAdmin;
+    private javax.swing.JLabel lblBGAdmin;
+    private javax.swing.JLabel lblBGBirdBook;
     private javax.swing.JLabel lblBGColourPicker;
     private javax.swing.JLabel lblBGCreateLog;
     private javax.swing.JLabel lblBGFind;
+    private javax.swing.JLabel lblBGMainMenu;
+    private javax.swing.JLabel lblBGhelpPage;
     private javax.swing.JLabel lblBackground;
-    private javax.swing.JLabel lblBackgroundBirdIDList;
     private javax.swing.JLabel lblBackgroundNewUser;
     private javax.swing.JLabel lblBirdImageBirdBook;
+    private javax.swing.JLabel lblColourError;
+    private javax.swing.JLabel lblCreateLogBird;
+    private javax.swing.JLabel lblCreateLogDate;
+    private javax.swing.JLabel lblCreateLogDesc;
+    private javax.swing.JLabel lblCreateLogLocation;
     private javax.swing.JLabel lblFindBirdImage;
+    private javax.swing.JLabel lblLogBook;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblNewUserName;
     private javax.swing.JLabel lblNewUserPassword1;
     private javax.swing.JLabel lblNewUserPassword2;
+    private javax.swing.JLabel lblSignUp;
+    private javax.swing.JLabel lblWrongInfo;
     private javax.swing.JLabel lblbackgroundLog;
-    private javax.swing.JLabel lblbackgroundLog2;
-    private javax.swing.JLabel lblbackgroundLog3;
-    private javax.swing.JLabel lblbackgroundLog4;
-    private javax.swing.JLabel lblbackgroundLog5;
-    private javax.swing.JLabel lblbackgroundLog6;
-    private javax.swing.JLabel lblhelpPage;
+    private javax.swing.JLabel lbllogError;
     private javax.swing.JTextArea txaBirdBook;
     private javax.swing.JTextArea txaLog;
     private javax.swing.JTextArea txaNewLogDesc;
     private javax.swing.JTextArea txafoundbirds;
-    private javax.swing.JTextArea txafoundbirds1;
     private javax.swing.JTextField txfFindSize;
     private javax.swing.JTextField txfLogLocation;
     private javax.swing.JTextField txfNewUserName;
@@ -1497,33 +1324,51 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void help(int s) {
+        jfhelp.setVisible(true);
         switch (s) {
             case 1:
-                lblhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/Helplogin.jpg")));
+                lblBGhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/Helplogin.jpg")));
                 break;
             case 2:
-                lblhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpMain.jpg")));
+                lblBGhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpMainMenu.jpg")));
                 break;
             case 3:
-                lblhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpLog.jpg")));
+                lblBGhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpLog.jpg")));
                 break;
             case 4:
-                lblhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpFind.jpg")));
+                lblBGhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpFind.jpg")));
                 break;
             case 5:
-                lblhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpBirdBook.jpg")));
+                lblBGhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpBirdBook.jpg")));
                 break;
+            case 6:
+                lblBGhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpNewUser.jpg")));
+                break;
+            case 7:
+                lblBGhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpColour.jpg")));
+                break;
+            case 8:
+                lblBGhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpAdmin.jpg")));
+                break;
+            case 9:
+                lblBGhelpPage.setIcon(new ImageIcon(getClass().getResource("/Images/HelpNewLog.jpg")));
+                break;
+
         }
 
     }
 
     private void settxafoundbirds() {
+        try {
+            String desc = birdArr.get(foundbird).getDescrition();
 
-        String desc = birdArr.get(foundbird).getDescrition();
+            txafoundbirds.setText(output.get(foundbird) + "\n\n" + desc);
+            lblFindBirdImage.setIcon(manger.Scaleimage("src/" + birdArr.get(foundbird).getImage(), lblFindBirdImage));
+            txafoundbirds.setCaretPosition(0);
+        } catch (IndexOutOfBoundsException e) {
+            txafoundbirds.setText("No birds Found");
+        }
 
-        txafoundbirds.setText(output.get(foundbird) + "\n\n" + desc);
-        lblFindBirdImage.setIcon(am.Scaleimage("src/" +birdArr.get(foundbird).getImage()));
-        txafoundbirds.setCaretPosition(0);
     }
 
 }

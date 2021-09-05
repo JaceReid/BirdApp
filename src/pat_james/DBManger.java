@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * DB class to connect to JavaDB database.
  */
 package pat_james;
 
 /**
  *
- * @author james
+ * @author James Devine
  */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -40,6 +39,7 @@ public class DBManger {
      *
      * @param sqlStatement String containing SQL query
      * @return result set from committed SQL query
+     * @throws java.sql.SQLException
      */
     public ResultSet queryTbl(String sqlStatement) throws SQLException {
         Statement stmt = conn.createStatement();
@@ -52,6 +52,7 @@ public class DBManger {
      * records
      *
      * @param sqlStatement String containing SQL query
+     * @throws java.sql.SQLException
      */
     public void updateTbl(String sqlStatement) throws SQLException {
         Statement stmt = conn.createStatement();
