@@ -2,7 +2,7 @@
 A birding app developed in Java. This project was developed for my School Final IT practical assessment task
 
 <p align="center">
-  <img src="example.png" alt="Polybar">
+  <img src="Example.png" alt="Bird App">
 </p>
 
 ## Requirements 
