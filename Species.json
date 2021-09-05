@@ -1,0 +1,473 @@
+{
+    "Species": [
+        {
+            "Beak": "Fishing",
+            "Habitat": "Ocean#Seashore",
+            "ID": 1,
+            "Name": "Penguin",
+            "Claw": "flippers"
+        },
+        {
+            "Beak": "Grazing",
+            "Habitat": "Grasslans#Karoo",
+            "ID": 2,
+            "Name": "Ostrich",
+            "Claw": "Two-toed"
+        },
+        {
+            "Beak": "Fishing",
+            "Habitat": "Ocean",
+            "ID": 3,
+            "Name": "Albatros",
+            "Claw": "Webbed"
+        },
+        {
+            "Beak": "Fishing",
+            "Habitat": "Ocean#Seashore",
+            "ID": 4,
+            "Name": "Petrel, Sherwater",
+            "Claw": "Webbed"
+        },
+        {
+            "Beak": "Fishing",
+            "Habitat": "Ocean#Seashore",
+            "ID": 5,
+            "Name": "Gannets",
+            "Claw": "Webbed"
+        },
+        {
+            "Beak": "Filter",
+            "Habitat": "Lake",
+            "ID": 6,
+            "Name": "Flamingo",
+            "Claw": "Webbed"
+        },
+        {
+            "Beak": "Fishing",
+            "Habitat": "Lakes#Rivers",
+            "ID": 7,
+            "Name": "Comorant, Darter",
+            "Claw": "Webbed"
+        },
+        {
+            "Beak": "Filter",
+            "Habitat": "Lakes#Rivers",
+            "ID": 8,
+            "Name": "Spoonbill",
+            "Claw": "Three long"
+        },
+        {
+            "Beak": "Long thin",
+            "Habitat": "Grassland",
+            "ID": 9,
+            "Name": "Ibis",
+            "Claw": "Three long"
+        },
+        {
+            "Beak": "Filter",
+            "Habitat": "Grsslands#Lake#Rivers",
+            "ID": 10,
+            "Name": "Duck, Goose",
+            "Claw": "Webbed"
+        },
+        {
+            "Beak": "Fishing",
+            "Habitat": "Grassland#Lakes#Rivers",
+            "ID": 11,
+            "Name": "Heron, Egret, Hamerkop",
+            "Claw": "Three long"
+        },
+        {
+            "Beak": "Hooked",
+            "Habitat": "Grassland",
+            "ID": 12,
+            "Name": "Secretarybird",
+            "Claw": "Three long"
+        },
+        {
+            "Beak": "Hooked",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 13,
+            "Name": "Raptor",
+            "Claw": "Talons"
+        },
+        {
+            "Beak": "Hooked",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 14,
+            "Name": "Falcon",
+            "Claw": "Talons"
+        },
+        {
+            "Beak": "Seed",
+            "Habitat": "Grassland# Fynbos",
+            "ID": 15,
+            "Name": "Francolins, Spurfowl",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Long Thin",
+            "Habitat": "Grassland",
+            "ID": 16,
+            "Name": "Stork",
+            "Claw": "Three long"
+        },
+        {
+            "Beak": "Seed",
+            "Habitat": "Fynbos#Grassland",
+            "ID": 17,
+            "Name": "Gunieafowl",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Fnybos",
+            "ID": 18,
+            "Name": "Flycatcher",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Wetland",
+            "ID": 19,
+            "Name": "Rail, flufftail",
+            "Claw": "Long Three"
+        },
+        {
+            "Beak": "Grazing",
+            "Habitat": "Grassland#Karoo#Wetland",
+            "ID": 20,
+            "Name": "Cranes",
+            "Claw": "Three long"
+        },
+        {
+            "Beak": "Fishing",
+            "Habitat": "Rivers",
+            "ID": 21,
+            "Name": "Finfoot",
+            "Claw": "Lobed"
+        },
+        {
+            "Beak": "Grazing",
+            "Habitat": "Grassloand#Karoo",
+            "ID": 22,
+            "Name": "Bustard",
+            "Claw": "three long"
+        },
+        {
+            "Beak": "Shorty Pointy",
+            "Habitat": "Lakes#Rivers",
+            "ID": 23,
+            "Name": "Jacana",
+            "Claw": "Three long thin"
+        },
+        {
+            "Beak": "Long Thin",
+            "Habitat": "Lakes#Rivers#Wetland",
+            "ID": 24,
+            "Name": "Painted-snipe",
+            "Claw": "Three long"
+        },
+        {
+            "Beak": "Long Thin",
+            "Habitat": "Seashore",
+            "ID": 25,
+            "Name": "Oystercatcher",
+            "Claw": "Three long"
+        },
+        {
+            "Beak": "Long Thin",
+            "Habitat": "Lakes#Rivers",
+            "ID": 26,
+            "Name": "Avocet, Stilt",
+            "Claw": "Three Long"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Seashore",
+            "ID": 27,
+            "Name": "Crab Plover",
+            "Claw": "Three Long"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grasslands#Wetland",
+            "ID": 28,
+            "Name": "Plover",
+            "Claw": "Three Long"
+        },
+        {
+            "Beak": "Long Tine",
+            "Habitat": "Lake#Seashore#Wetland",
+            "ID": 29,
+            "Name": "Snipe, Stint",
+            "Claw": "Three Long"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Karoo",
+            "ID": 30,
+            "Name": "Thick-Knee",
+            "Claw": "Three Long"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Seashore",
+            "ID": 31,
+            "Name": "Gull, Tern",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Forest#Grasslands#Karoo",
+            "ID": 32,
+            "Name": "Pigeon, Dove",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Short Fruit beak",
+            "Habitat": "Forest#Fynbos",
+            "ID": 33,
+            "Name": "Turaco",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Short Curved Down",
+            "Habitat": "Forest#Fynbos",
+            "ID": 34,
+            "Name": "Cuckoo, Coucal",
+            "Claw": "Two Front Two Back"
+        },
+        {
+            "Beak": "Hooked",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 35,
+            "Name": "Owl",
+            "Claw": "Two Front Two Back"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 36,
+            "Name": "Nightjar",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 37,
+            "Name": "Swift",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Short Fruit beak",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 38,
+            "Name": "Mousebird",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Short Fruit beak",
+            "Habitat": "Forest",
+            "ID": 39,
+            "Name": "Trogan",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Long Sharp",
+            "Habitat": "Lake#River#Wetland",
+            "ID": 40,
+            "Name": "Kingfisher",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Long Curved Down",
+            "Habitat": "Grassland#Fnybos",
+            "ID": 41,
+            "Name": "Bee-eater",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Long Curved Down",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 42,
+            "Name": "Wood-Hoopoe, Hoopoe",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 43,
+            "Name": "Honeyguid",
+            "Claw": "Two Front Two Back"
+        },
+        {
+            "Beak": "Fishing",
+            "Habitat": "Ocean",
+            "ID": 44,
+            "Name": "Grebe",
+            "Claw": "Lobed"
+        },
+        {
+            "Beak": "Long Thin",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 45,
+            "Name": "Woodpecker",
+            "Claw": "Two Front Two Back"
+        },
+        {
+            "Beak": "Short Curved Down",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 46,
+            "Name": "Lark",
+            "Claw": "Two Front Two Back"
+        },
+        {
+            "Beak": "Short",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 47,
+            "Name": "Swallow",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Hooked",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 48,
+            "Name": "Cuckooshrike",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Short Curved Down",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 49,
+            "Name": "Drogon",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Long Thin",
+            "Habitat": "Forest#Fynbos",
+            "ID": 50,
+            "Name": "Oriole",
+            "Claw": "Three Short"
+        },
+        {
+            "Beak": "Thick hooked",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 51,
+            "Name": "Crow, Raven",
+            "Claw": "Three Long"
+        },
+        {
+            "Beak": "Short Thin",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 52,
+            "Name": "BulBul, GreenBul",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Long Thin",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 53,
+            "Name": "Thrush, Robin",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Short Thin",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 54,
+            "Name": "Warbler",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 55,
+            "Name": "Batise",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Short Thin",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 56,
+            "Name": "Wagtail",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 57,
+            "Name": "Shrike",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 58,
+            "Name": "Boubou, Bush Shrike",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Short Thin ",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 59,
+            "Name": "Starling",
+            "Claw": "Three Long"
+        },
+        {
+            "Beak": "Long Curved Down",
+            "Habitat": "Grassland#Fynbos",
+            "ID": 60,
+            "Name": "Sugarbird",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Long Curved Down",
+            "Habitat": "Grassland#Fynbos",
+            "ID": 61,
+            "Name": "Sunbird",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Short Thin",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 62,
+            "Name": "White-eye",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 63,
+            "Name": "Weaver, Bishop, Sparrow",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 64,
+            "Name": "Waxbill",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 65,
+            "Name": "Whydah",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 66,
+            "Name": "Canarie, Siskin",
+            "Claw": "Three short"
+        },
+        {
+            "Beak": "Stubby",
+            "Habitat": "Grassland#Forest#Fynbos",
+            "ID": 67,
+            "Name": "Bunting",
+            "Claw": "Three short"
+        }
+    ]
+}
