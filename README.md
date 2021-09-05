@@ -1,5 +1,5 @@
 # BirdApp
-A birding app developed in Java
+A birding app developed in Java, This project was developed for my School Final IT practical assessment task
 
 ## Requirements 
 
