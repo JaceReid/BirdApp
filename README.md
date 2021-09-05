@@ -4,7 +4,7 @@ A birding app developed in Java. This project was developed for my School Final 
 ## Requirements 
 
 Uses Netbeans GUI so requires Netbeans. Extra JAR Files are included in the project.
-- Netbeans v8 or newer
+- Netbeans v8.0 or newer
 - Java JDK 8 or newer
 
 ## Customization
